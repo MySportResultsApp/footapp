@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL & NCAA Scores</title>
+    <meta name="description" content="Live, recent and upcoming NFL and NCAA football scores.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-mark"></div>
+                <div class="brand-text">
+                    <div class="brand-title">Football Scores</div>
+                    <div class="brand-subtitle">NFL & NCAA</div>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <a class="nav-link" data-nav href="index.html">News</a>
+                <a class="nav-link" data-nav href="scores.html">Scores</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="container">
+
+            <section class="hero">
+                <div class="hero-top">
+                    <div class="hero-copy">
+                        <h1>Live and recent scores</h1>
+                        <p>
+                            Current football scoreboard for NFL and NCAA,
+                            including live games, finished games and upcoming matchups.
+                        </p>
+                    </div>
+
+                    <div class="hero-meta">
+                        <div class="badge" id="gamesCountBadge">Loading...</div>
+                        <div class="badge green" id="liveCountBadge">Checking live...</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-head">
+                    <div>
+                        <div class="section-title">Filter</div>
+                        <div class="section-subtitle">Choose league and game status</div>
+                    </div>
+                </div>
+
+                <div class="toolbar">
+                    <select class="select" id="leagueSelect">
+                        <option value="all">All leagues</option>
+                        <option value="nfl">NFL</option>
+                        <option value="ncaa">NCAA</option>
+                    </select>
+
+                    <select class="select" id="statusSelect">
+                        <option value="all">All games</option>
+                        <option value="live">Live</option>
+                        <option value="final">Final</option>
+                        <option value="upcoming">Upcoming</option>
+                    </select>
+
+                    <button class="button secondary" id="clearBtn">Clear</button>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-head">
+                    <div>
+                        <div class="section-title">Games</div>
+                        <div class="section-subtitle">Live loaded from ESPN scoreboard</div>
+                    </div>
+                </div>
+
+                <div id="scoresGrid" class="grid scores">
+                    <div class="state-box">
+                        <div class="loader"></div>
+                        <div class="state-title">Loading scores</div>
+                        <div class="state-text">Fetching NFL and NCAA football games...</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="scores.js"></script>
+</body>
+</html>
