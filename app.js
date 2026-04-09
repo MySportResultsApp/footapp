@@ -305,7 +305,6 @@ function renderArticleCard(article) {
                     ${article.byline ? ' • ' + escapeHtml(article.byline) : ''}
                 </div>
                 <div class="article-desc">${escapeHtml(article.description || 'Open the article to read more.')}</div>
-<a class="article-link" href="article.html?id=${encodeURIComponent(article.id)}">Open Article</a>
 </div>
         </article>
     `;
