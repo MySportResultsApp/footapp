@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article</title>
+    <meta name="description" content="Football article preview page.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-mark"></div>
+                <div class="brand-text">
+                    <div class="brand-title">Football News</div>
+                    <div class="brand-subtitle">NFL & NCAA</div>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <a class="nav-link" data-nav href="index.html">News</a>
+                <a class="nav-link" data-nav href="scores.html">Scores</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="container">
+            <section id="articleContainer">
+                <div class="state-box">
+                    <div class="loader"></div>
+                    <div class="state-title">Loading article</div>
+                    <div class="state-text">Preparing article preview...</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadArticlePage();
+        });
+
+        async function loadArticlePage() {
+            const container = document.getElementById('articleContainer');
+            const articleId = getQueryParam('id');
+
+            if (!articleId) {
+                renderState(container, createEmptyState(
+                    'Article not found',
+                    'No article id was provided.'
+                ));
+                return;
+            }
+
+            try {
+                let articles = loadArticlesFromCache();
+
+                if (!articles || articles.length === 0) {
+                    articles = await fetchAllNews();
+                    saveArticlesToCache(articles);
+                }
+
+                const article = getArticleById(articles, articleId);
+
+                if (!article) {
+                    renderState(container, createEmptyState(
+                        'Article not found',
+                        'This article is not available in cache anymore.'
+                    ));
+                    return;
+                }
+
+                document.title = article.title + ' | Football News';
+
+                const leagueLabel = article.league === 'nfl' ? 'NFL' : 'NCAA';
+
+                container.innerHTML = `
+                    <article class="card article-card">
+                        ${article.image ? `
+                            <img class="article-image" src="${escapeHtml(article.image)}" alt="${escapeHtml(article.title)}">
+                        ` : `
+                            <div class="article-image article-image-placeholder">
+                                <span>${escapeHtml(leagueLabel)}</span>
+                            </div>
+                        `}
+
+                        <div class="card-body">
+                            <div class="badge ${article.league === 'nfl' ? 'green' : ''}">${escapeHtml(leagueLabel)}</div>
+                            <div class="article-title">${escapeHtml(article.title)}</div>
+                            <div class="article-meta">
+                                ${article.published ? escapeHtml(formatDisplayDateTime(article.published)) : ''}
+                                ${article.byline ? ' • ' + escapeHtml(article.byline) : ''}
+                            </div>
+                            <div class="article-desc">${escapeHtml(article.description || 'Open the full article to read more.')}</div>
+
+                            <div class="toolbar">
+                                <a class="button" href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer">Open Original</a>
+                                <button class="button secondary" type="button" onclick="goBackSafe()">Back</button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            } catch (error) {
+                console.error('=ARTICLE PAGE ERROR=', error);
+
+                renderState(container, createErrorState(
+                    'Failed to load article',
+                    'Could not prepare article preview.'
+                ));
+            }
+        }
+
+        function goBackSafe() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
