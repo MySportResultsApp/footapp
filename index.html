@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL & NCAA News</title>
+    <meta name="description" content="Latest NFL and NCAA football news with real articles and images.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-mark"></div>
+                <div class="brand-text">
+                    <div class="brand-title">Football News</div>
+                    <div class="brand-subtitle">NFL & NCAA</div>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <a class="nav-link" data-nav href="index.html">News</a>
+                <a class="nav-link" data-nav href="scores.html">Scores</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="container">
+
+            <!-- HERO -->
+            <section class="hero">
+                <div class="hero-top">
+                    <div class="hero-copy">
+                        <h1>Latest football news</h1>
+                        <p>
+                            Real-time NFL and NCAA football news with images.
+                            Clean feed without unnecessary clutter.
+                        </p>
+                    </div>
+
+                    <div class="hero-meta">
+                        <div class="badge" id="countBadge">Loading...</div>
+                        <div class="badge green" id="sourceBadge">Sources...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FILTER -->
+            <section class="section">
+                <div class="section-head">
+                    <div>
+                        <div class="section-title">Filter</div>
+                        <div class="section-subtitle">Search and select league</div>
+                    </div>
+                </div>
+
+                <div class="toolbar">
+                    <input
+                        class="input"
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search news..."
+                    >
+
+                    <select class="select" id="leagueSelect">
+                        <option value="all">All</option>
+                        <option value="nfl">NFL</option>
+                        <option value="ncaa">NCAA</option>
+                    </select>
+
+                    <button class="button secondary" id="clearBtn">Clear</button>
+                </div>
+            </section>
+
+            <!-- NEWS GRID -->
+            <section class="section">
+                <div class="section-head">
+                    <div>
+                        <div class="section-title">Articles</div>
+                        <div class="section-subtitle">Live from ESPN</div>
+                    </div>
+                </div>
+
+                <div id="newsGrid" class="grid news">
+                    <div class="state-box">
+                        <div class="loader"></div>
+                        <div class="state-title">Loading news</div>
+                        <div class="state-text">Fetching NFL & NCAA articles...</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
