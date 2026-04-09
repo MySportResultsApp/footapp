@@ -305,8 +305,8 @@ function renderArticleCard(article) {
                     ${article.byline ? ' • ' + escapeHtml(article.byline) : ''}
                 </div>
                 <div class="article-desc">${escapeHtml(article.description || 'Open the article to read more.')}</div>
-                <a class="article-link" href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer">Open Article</a>
-            </div>
+<a class="article-link" href="article.html?id=${encodeURIComponent(article.id)}">Open Article</a>
+</div>
         </article>
     `;
 }
@@ -584,6 +584,33 @@ function renderScoreCard(game) {
         </article>
     `;
 }
+
+
+function saveArticlesToCache(articles) {
+    try {
+        localStorage.setItem('football_articles_cache', JSON.stringify(articles));
+    } catch (error) {
+    }
+}
+
+function loadArticlesFromCache() {
+    try {
+        const raw = localStorage.getItem('football_articles_cache');
+        return raw ? JSON.parse(raw) : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function getArticleById(items, articleId) {
+    return (items || []).find(function (item) {
+        return String(item.id) === String(articleId);
+    }) || null;
+}
+
+
+
+
 
 function renderScoreCards(container, items, emptyTitle, emptyText) {
     if (!container) {
