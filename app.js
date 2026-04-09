@@ -76,7 +76,7 @@ function formatDisplayDateTime(dateString) {
         return dateString;
     }
 
-    return date.toLocaleString(undefined, {
+    return date.toLocaleString('en-US', {
         weekday: 'short',
         month: 'short',
         day: 'numeric',
@@ -97,7 +97,7 @@ function formatDisplayDate(dateString) {
         return dateString;
     }
 
-    return date.toLocaleDateString(undefined, {
+    return date.toLocaleDateString('en-US', {
         weekday: 'short',
         month: 'short',
         day: 'numeric',
