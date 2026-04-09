@@ -21,6 +21,7 @@ async function initNewsPage() {
     try {
         const articles = await fetchAllNews();
         ALL_ARTICLES = articles;
+        saveArticlesToCache(articles);
 
         renderArticleCards(
             container,
